@@ -1,10 +1,18 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#1a0b1f] text-white flex flex-col items-center justify-center p-6">
       <div className="text-center space-y-6 max-w-2xl">
-        <p className="text-5xl animate-pulse">🧚‍♀️</p>
+        <Image
+          src="/fada.png"
+          alt="Fada guardiã do reino"
+          width={220}
+          height={220}
+          priority
+          className="mx-auto rounded-full border-2 border-pink-400/40 shadow-lg shadow-pink-500/30 object-cover"
+        />
         <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
           Vitória Eduarda
         </h1>
