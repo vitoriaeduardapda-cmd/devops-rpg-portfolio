@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vitória Eduarda — DevOps Adventurer",
+  title: "Vitória Eduarda — Devops Adventurer",
   description: "Portfólio RPG de Vitória Eduarda: jornada DevOps e Cloud em Next.js, GitHub Actions e Vercel.",
 };
 
