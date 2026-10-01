@@ -22,17 +22,8 @@ export default function Home() {
   }
 
   return (
-    <main className="relative min-h-screen bg-[#1a0b1f] text-white flex flex-col items-center justify-center p-6 overflow-hidden">
-      {/* Reino ao fundo — bem transparente só para dar profundidade */}
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-        <span className="text-[22rem] md:text-[30rem] leading-none opacity-10 blur-[1px] select-none">
-          🏰
-        </span>
-      </div>
-      {/* Névoa rosa/lilás por cima do castelo */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#1a0b1f]/40 via-transparent to-[#1a0b1f]/80" />
-
-      <div className="relative z-10 text-center space-y-6 max-w-2xl">
+    <main className="min-h-screen bg-[#1a0b1f] text-white flex flex-col items-center justify-center p-6">
+      <div className="text-center space-y-6 max-w-2xl">
         <div
           ref={fadaRef}
           onMouseEnter={pulsar}
