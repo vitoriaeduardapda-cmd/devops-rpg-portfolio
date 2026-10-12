@@ -50,7 +50,7 @@ export default function Home() {
         </h2>
 
         <Link href="/realm" className="inline-block mt-8 px-8 py-4 bg-gradient-to-r from-pink-600 to-purple-600 text-white text-xl font-semibold rounded-full shadow-lg shadow-pink-500/30 hover:scale-105 transition-transform">
-          ⚔️ ENTER THE REALM
+          ⚔️ Clique para Entrar
         </Link>
       </div>
     </main>
