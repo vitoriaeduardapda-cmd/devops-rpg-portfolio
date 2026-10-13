@@ -32,12 +32,12 @@ const missoes = [
   },
 ];
 
-// Cores pastéis para as ferramentas — rosa bebê, azul bebê, lilás, amarelo pastel
+// Ferramentas com destaque maior — tons mais escuros e vivos, ainda doces
 const pasteis = [
-  "bg-[#FFB3C7] border-[#FF8FAB]",
-  "bg-[#A9DEF9] border-[#7CC6F5]",
-  "bg-[#CDB4F6] border-[#A78BFA]",
-  "bg-[#F6D86B] border-[#EAB308]",
+  "bg-gradient-to-r from-[#FB7185] to-[#F472B6] border-[#BE123C] shadow-rose-400/50",
+  "bg-gradient-to-r from-[#38BDF8] to-[#818CF8] border-[#0369A1] shadow-sky-400/50",
+  "bg-gradient-to-r from-[#A78BFA] to-[#C084FC] border-[#6D28D9] shadow-violet-400/50",
+  "bg-gradient-to-r from-[#FBBF24] to-[#F59E0B] border-[#B45309] shadow-amber-400/50",
 ];
 
 export default function Projetos() {
@@ -92,9 +92,9 @@ export default function Projetos() {
                     key={tech}
                     style={{
                       textShadow:
-                        "0 1px 3px rgba(60,20,60,0.65), 0 0 1px rgba(60,20,60,0.9)",
+                        "0 1px 4px rgba(40,10,40,0.8), 0 0 2px rgba(40,10,40,0.9)",
                     }}
-                    className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wide rounded-lg border-2 text-white shadow-md transition-all duration-200 cursor-default hover:scale-110 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-pink-400/50 hover:brightness-110 ${pasteis[i % pasteis.length]}`}
+                    className={`px-3.5 py-2 text-sm font-extrabold uppercase tracking-wider rounded-lg border-2 text-white shadow-lg transition-all duration-200 cursor-default hover:scale-110 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-pink-400/50 hover:brightness-110 ${pasteis[i % pasteis.length]}`}
                   >
                     {tech}
                   </span>
