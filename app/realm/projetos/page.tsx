@@ -94,7 +94,7 @@ export default function Projetos() {
                       textShadow:
                         "0 1px 3px rgba(60,20,60,0.65), 0 0 1px rgba(60,20,60,0.9)",
                     }}
-                    className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wide rounded-lg border-2 text-white shadow-md ${pasteis[i % pasteis.length]}`}
+                    className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wide rounded-lg border-2 text-white shadow-md transition-all duration-200 cursor-default hover:scale-110 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-pink-400/50 hover:brightness-110 ${pasteis[i % pasteis.length]}`}
                   >
                     {tech}
                   </span>
