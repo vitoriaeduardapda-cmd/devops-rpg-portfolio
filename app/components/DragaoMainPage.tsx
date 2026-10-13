@@ -4,9 +4,11 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 // DRAGÃO NA MAINPAGE
-// Silhueta de dragão em SVG rosa-escuro (baseada na referência: voo lateral,
-// asas de morcego erguidas, cauda longa com ponta de flecha) que percorre um
-// caminho em formato de INFINITO (∞) por toda a tela, atrás do conteúdo.
+// Silhueta de dragão em SVG rosa-escuro fiel à referência: voo lateral para a
+// esquerda, cabeça pequena com chifres, asa grande de morcego erguida, segunda
+// asa estendida para trás, cauda longa com ponta de flecha. As asas batem
+// (grupos separados com origem no ombro) e o corpo percorre um INFINITO (∞)
+// por toda a tela, atrás do conteúdo.
 // Para mudar ele no futuro, é só falar "dragão na mainpage" e editar este arquivo.
 export function DragaoMainPage() {
   const dragaoRef = useRef<HTMLDivElement>(null);
@@ -48,10 +50,10 @@ export function DragaoMainPage() {
       },
     });
 
-    // Asas: batem alternadas como um voo de verdade
+    // Asas: batem alternadas a partir do ombro, como um voo de verdade
     const asaFrente = gsap.to(asaFrenteRef.current, {
       rotation: -14,
-      svgOrigin: "300 220",
+      svgOrigin: "306 232",
       duration: 0.9,
       yoyo: true,
       repeat: -1,
@@ -59,7 +61,7 @@ export function DragaoMainPage() {
     });
     const asaTras = gsap.to(asaTrasRef.current, {
       rotation: 10,
-      svgOrigin: "292 222",
+      svgOrigin: "285 238",
       duration: 0.9,
       delay: 0.45,
       yoyo: true,
@@ -85,67 +87,67 @@ export function DragaoMainPage() {
         className="w-[min(70vw,520px)] opacity-60"
       >
         <svg
-          viewBox="0 0 600 400"
+          viewBox="0 0 640 400"
           className="h-auto w-full [filter:drop-shadow(0_0_28px_rgba(236,72,153,0.55))]"
         >
-          {/* asa de trás (estendida para a esquerda) */}
+          {/* asa de trás (estendida para a esquerda, ponta fina) */}
           <g ref={asaTrasRef}>
             <path
-              d="M292 218 C250 195 195 178 135 172 L162 190 L128 202 L168 212 L145 232 L190 230 C228 230 262 226 292 228 Z"
+              d="M285 235 C230 215 160 200 70 195 L105 208 L75 220 L115 228 L95 244 L140 244 C190 246 240 244 285 242 Z"
               fill="#BE185D"
             />
           </g>
 
-          {/* cauda longa com ponta de flecha */}
+          {/* cauda longa afinando com ponta de flecha */}
           <path
-            d="M392 250 C460 252 520 280 562 326 L572 316 C534 266 468 238 396 236 Z"
+            d="M394 258 C460 260 525 285 575 330 L585 320 C540 272 472 246 398 244 Z"
             fill="#BE185D"
           />
-          <path d="M562 326 L596 336 L568 350 Z" fill="#BE185D" />
+          <path d="M575 330 L608 340 L580 354 Z" fill="#BE185D" />
 
-          {/* corpo */}
+          {/* corpo compacto */}
           <ellipse
             cx="310"
-            cy="258"
-            rx="92"
-            ry="38"
+            cy="262"
+            rx="88"
+            ry="36"
             fill="#BE185D"
-            transform="rotate(-8 310 258)"
+            transform="rotate(-6 310 262)"
           />
 
-          {/* espinhos dorsais */}
+          {/* espinhos no pescoço/dorso */}
           <path
-            d="M255 224 l10 -16 l10 16 Z M285 220 l10 -16 l10 16 Z M315 217 l10 -16 l10 16 Z M345 217 l10 -16 l10 16 Z"
+            d="M200 214 l9 -14 l9 14 Z M228 210 l9 -14 l9 14 Z M258 222 l9 -14 l9 14 Z M340 222 l9 -14 l9 14 Z"
             fill="#BE185D"
           />
 
           {/* pernas recolhidas em voo */}
-          <path d="M280 292 L272 320 L287 323 L295 294 Z" fill="#BE185D" />
-          <path d="M345 294 L343 322 L358 323 L362 294 Z" fill="#BE185D" />
+          <path d="M250 292 L244 318 L258 320 L264 294 Z" fill="#BE185D" />
+          <path d="M350 294 L348 320 L362 321 L366 294 Z" fill="#BE185D" />
 
-          {/* pescoço */}
+          {/* pescoço grosso em curva */}
           <path
-            d="M248 240 C210 232 175 220 145 205 L158 190 C188 203 222 214 258 222 Z"
+            d="M250 248 C210 242 170 232 138 220 L150 206 C182 216 220 226 260 232 Z"
             fill="#BE185D"
           />
 
-          {/* cabeça */}
+          {/* cabeça pequena */}
           <path
-            d="M158 190 L118 196 L130 204 L116 212 L152 212 C162 206 164 197 158 190 Z"
+            d="M120 208 L82 212 L92 220 L80 228 L116 228 C126 222 128 214 120 208 Z"
             fill="#BE185D"
           />
 
-          {/* chifres */}
-          <path d="M150 190 L138 168 L160 186 Z" fill="#BE185D" />
-          <path d="M162 191 L156 168 L172 188 Z" fill="#BE185D" />
+          {/* chifres varrendo para trás */}
+          <path d="M112 208 L140 182 L124 210 Z" fill="#BE185D" />
+          <path d="M122 210 L152 190 L134 214 Z" fill="#BE185D" />
 
           {/* olho (ponto de luz para destacar na silhueta) */}
-          <circle cx="140" cy="201" r="3" fill="#FBCFE8" />
+          <circle cx="104" cy="216" r="2.8" fill="#FBCFE8" />
 
-          {/* asa da frente (erguida, por cima do corpo) */}
+          {/* asa da frente (grande, erguida, por cima do corpo) */}
           <g ref={asaFrenteRef}>
             <path
-              d="M296 222 C292 160 305 95 340 35 L352 72 L372 52 L380 92 L402 80 L400 120 L424 114 L410 152 C388 186 340 212 296 226 Z"
+              d="M306 232 C300 165 315 90 355 25 L365 65 L388 45 L392 88 L416 76 L412 118 L438 110 L424 150 C400 190 350 218 306 234 Z"
               fill="#BE185D"
             />
           </g>
