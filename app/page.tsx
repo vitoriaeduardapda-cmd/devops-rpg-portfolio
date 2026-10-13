@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 import gsap from "gsap";
+import { DragaoMainPage } from "./components/DragaoMainPage";
 
 export default function Home() {
   // Referência para a moldura da fada — o GSAP anima esse elemento
@@ -22,8 +23,10 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-[#1a0b1f] text-white flex flex-col items-center justify-center p-6">
-      <div className="text-center space-y-6 max-w-2xl">
+    <main className="relative min-h-screen overflow-hidden bg-[#1a0b1f] text-white flex flex-col items-center justify-center p-6">
+      {/* Dragão na mainpage: voa atrás de tudo */}
+      <DragaoMainPage />
+      <div className="relative z-10 text-center space-y-6 max-w-2xl">
         <div
           ref={fadaRef}
           onMouseEnter={pulsar}
