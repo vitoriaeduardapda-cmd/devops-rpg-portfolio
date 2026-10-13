@@ -32,6 +32,14 @@ const missoes = [
   },
 ];
 
+// Cores pastéis para as ferramentas — rosa bebê, azul bebê, lilás, amarelo pastel
+const pasteis = [
+  "bg-[#FFB3C7] border-[#FF8FAB]",
+  "bg-[#A9DEF9] border-[#7CC6F5]",
+  "bg-[#CDB4F6] border-[#A78BFA]",
+  "bg-[#F6D86B] border-[#EAB308]",
+];
+
 export default function Projetos() {
   return (
     <main className="min-h-screen bg-[#1a0b1f] text-white p-8 md:p-12">
@@ -78,11 +86,15 @@ export default function Projetos() {
                 {missao.descricao}
               </p>
 
-              <div className="flex flex-wrap gap-2">
-                {missao.stack.map((tech) => (
+              <div className="flex flex-wrap gap-2 border-t border-purple-500/20 pt-4 mt-2">
+                {missao.stack.map((tech, i) => (
                   <span
                     key={tech}
-                    className="px-2 py-1 text-xs font-mono rounded-md bg-purple-500/10 border border-purple-500/30 text-purple-200"
+                    style={{
+                      textShadow:
+                        "0 1px 3px rgba(60,20,60,0.65), 0 0 1px rgba(60,20,60,0.9)",
+                    }}
+                    className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wide rounded-lg border-2 text-white shadow-md ${pasteis[i % pasteis.length]}`}
                   >
                     {tech}
                   </span>
