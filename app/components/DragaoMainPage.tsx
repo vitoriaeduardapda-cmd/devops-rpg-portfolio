@@ -12,12 +12,21 @@ export function DragaoMainPage() {
   const asaTrasRef = useRef<SVGGElement>(null);
 
   useEffect(() => {
-    // Voo: desliza suave para os lados e para cima/baixo, sem parar
-    const voo = gsap.to(vooRef.current, {
-      x: 36,
-      y: -26,
-      rotation: 2,
-      duration: 5,
+    // Travessia: entra pela direita e sai pela esquerda, em loop, sempre
+    // atrás da fada e dos textos (o componente fica atrás do conteúdo com z-10).
+    // O dragão olha para a esquerda, que é a direção do voo.
+    gsap.set(vooRef.current, { x: "55vw" });
+    const travessia = gsap.to(vooRef.current, {
+      x: "-55vw",
+      duration: 16,
+      repeat: -1,
+      ease: "none",
+    });
+
+    // Flutuação: sobe e desce suave enquanto atravessa
+    const flutuar = gsap.to(vooRef.current, {
+      y: -30,
+      duration: 2.5,
       yoyo: true,
       repeat: -1,
       ease: "sine.inOut",
@@ -43,7 +52,8 @@ export function DragaoMainPage() {
     });
 
     return () => {
-      voo.kill();
+      travessia.kill();
+      flutuar.kill();
       asaFrente.kill();
       asaTras.kill();
     };
