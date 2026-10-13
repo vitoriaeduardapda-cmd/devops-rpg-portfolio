@@ -37,7 +37,7 @@ const pasteis = [
   "bg-gradient-to-r from-[#FB7185] to-[#F472B6] border-[#BE123C] shadow-rose-400/50",
   "bg-gradient-to-r from-[#38BDF8] to-[#818CF8] border-[#0369A1] shadow-sky-400/50",
   "bg-gradient-to-r from-[#A78BFA] to-[#C084FC] border-[#6D28D9] shadow-violet-400/50",
-  "bg-gradient-to-r from-[#FBBF24] to-[#F59E0B] border-[#B45309] shadow-amber-400/50",
+  "bg-gradient-to-r from-[#FDE68A] to-[#FCD34D] border-[#D97706] shadow-amber-300/50",
 ];
 
 export default function Projetos() {
@@ -94,7 +94,7 @@ export default function Projetos() {
                       textShadow:
                         "0 1px 4px rgba(40,10,40,0.8), 0 0 2px rgba(40,10,40,0.9)",
                     }}
-                    className={`px-3.5 py-2 text-sm font-extrabold uppercase tracking-wider rounded-lg border-2 text-white shadow-lg transition-all duration-200 cursor-default hover:scale-110 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-pink-400/50 hover:brightness-110 ${pasteis[i % pasteis.length]}`}
+                    className={`px-2.5 py-1 text-xs font-bold uppercase tracking-wide rounded-lg border-2 text-white shadow-md transition-all duration-200 cursor-default hover:scale-110 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-pink-400/50 hover:brightness-110 ${pasteis[i % pasteis.length]}`}
                   >
                     {tech}
                   </span>
