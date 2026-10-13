@@ -1,18 +1,29 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 // DRAGÃO NA MAINPAGE
-// Desenho exato da referência em rosa-escuro (public/dragao-rosa.png, gerado a
-// partir de public/dragao.png) que entra pela direita, ondula até a esquerda e
-// some da tela, atrás do conteúdo. Como é uma imagem pronta, o bater de asas
-// virou um balanço de voo (inclina e ondula enquanto voa).
+// Flip-book com 2 quadros (public/dragao-voo-1.png = asas em cima,
+// public/dragao-voo-2.png = asas embaixo) que se alternam para parecer que as
+// asas estão batendo, enquanto ele cruza a tela ondulando e some, atrás do conteúdo.
 // Para mudar ele no futuro, é só falar "dragão na mainpage" e editar este arquivo.
+const QUADROS = ["/dragao-voo-1.png", "/dragao-voo-2.png"];
+
 export function DragaoMainPage() {
   const dragaoRef = useRef<HTMLDivElement>(null);
   const balancoRef = useRef<HTMLDivElement>(null);
+  // Quadro atual do bater de asas (0 = asas em cima, 1 = asas embaixo)
+  const [quadro, setQuadro] = useState(0);
+
+  useEffect(() => {
+    // Alterna os quadros para animar o bater de asas
+    const asas = setInterval(() => {
+      setQuadro((q) => (q + 1) % QUADROS.length);
+    }, 350);
+    return () => clearInterval(asas);
+  }, []);
 
   useEffect(() => {
     const el = dragaoRef.current;
@@ -33,7 +44,7 @@ export function DragaoMainPage() {
       },
     });
 
-    // Balanço de voo: inclina e ondula como se estivesse batendo as asas
+    // Balanço de voo: inclina e ondula junto do bater de asas
     const balanco = gsap.to(balancoRef.current, {
       rotation: 5,
       skewY: 3,
@@ -59,15 +70,24 @@ export function DragaoMainPage() {
         style={{ transformOrigin: "center" }}
         className="w-[min(70vw,520px)] opacity-60"
       >
-        <div ref={balancoRef} style={{ transformOrigin: "center" }}>
-          <Image
-            src="/dragao-rosa.png"
-            alt=""
-            width={300}
-            height={300}
-            priority
-            className="h-auto w-full [filter:drop-shadow(0_0_28px_rgba(236,72,153,0.55))]"
-          />
+        <div
+          ref={balancoRef}
+          style={{ transformOrigin: "center" }}
+          className="relative [filter:drop-shadow(0_0_28px_rgba(236,72,153,0.55))]"
+        >
+          {QUADROS.map((src, i) => (
+            <Image
+              key={src}
+              src={src}
+              alt=""
+              width={300}
+              height={300}
+              priority
+              className={
+                "h-auto w-full " + (i === quadro ? "block" : "hidden")
+              }
+            />
+          ))}
         </div>
       </div>
     </div>
