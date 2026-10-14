@@ -169,7 +169,7 @@ function Dado() {
       x: euler.x + volta * 2,
       y: euler.y + volta * 2,
       z: euler.z + volta,
-      duration: 2,
+      duration: 1.2,
       ease: "power4.out",
       onComplete: () => {
         rolando.current = false;
