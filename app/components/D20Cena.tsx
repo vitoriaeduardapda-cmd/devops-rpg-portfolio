@@ -117,6 +117,7 @@ function poseNumero(face: Face): {
 function Dado() {
   const grupo = useRef<THREE.Group>(null);
   const rolando = useRef(false);
+  const rolarRef = useRef(() => {});
 
   // Geometria + faces numeradas (calculado 1 vez)
   const { geometria, faces, texturas } = useMemo(() => {
@@ -145,9 +146,8 @@ function Dado() {
     }
   });
 
-  function rolar(e: { stopPropagation: () => void }) {
+  function rolar() {
     if (!grupo.current || rolando.current) return;
-    e.stopPropagation(); // clica no dado sem sair da página
     rolando.current = true;
 
     // Sorteia a face e calcula a rotação que a deixa virada para cima
@@ -177,6 +177,14 @@ function Dado() {
     });
   }
 
+  // O botão "Clique para Entrar" pede a rolagem por evento antes de navegar
+  useEffect(() => {
+    rolarRef.current = rolar;
+    const ouvir = () => rolarRef.current();
+    window.addEventListener("d20-rolar", ouvir);
+    return () => window.removeEventListener("d20-rolar", ouvir);
+  });
+
   return (
     <group
       ref={grupo}
@@ -184,27 +192,27 @@ function Dado() {
       onPointerOver={() => (document.body.style.cursor = "pointer")}
       onPointerOut={() => (document.body.style.cursor = "auto")}
     >
-      {/* Cristal translúcido rosa */}
+      {/* Cristal translúcido roxo */}
       <mesh geometry={geometria}>
         <meshPhysicalMaterial
-          color="#f9a8d4"
+          color="#d8b4fe"
           transmission={1}
           thickness={1.2}
           roughness={0.15}
           ior={1.4}
           iridescence={0.5}
           iridescenceIOR={1.3}
-          attenuationColor="#ec4899"
+          attenuationColor="#a855f7"
           attenuationDistance={2.5}
         />
       </mesh>
-      {/* Núcleo roxo brilhante por dentro */}
+      {/* Núcleo roxo profundo brilhante por dentro */}
       <mesh scale={0.55}>
         <icosahedronGeometry args={[RAIO, 0]} />
         <meshStandardMaterial
-          color="#7c3aed"
-          emissive="#a855f7"
-          emissiveIntensity={1.2}
+          color="#6d28d9"
+          emissive="#8b5cf6"
+          emissiveIntensity={1.4}
           roughness={0.4}
         />
       </mesh>
@@ -231,28 +239,28 @@ export function D20Cena({ tamanho = 112 }: { tamanho?: number }) {
       <span className="block cursor-pointer" style={{ width: tamanho, height: tamanho }}>
         <Canvas dpr={[1, 1.75]} camera={{ position: [0, 0, 5.2], fov: 40 }}>
           <ambientLight intensity={0.35} />
-          <pointLight position={[4, 3, 4]} intensity={60} color="#ec4899" />
-          <pointLight position={[-4, -2, 3]} intensity={60} color="#a855f7" />
+          <pointLight position={[4, 3, 4]} intensity={60} color="#c084fc" />
+          <pointLight position={[-4, -2, 3]} intensity={60} color="#7c3aed" />
           <Dado />
-          {/* Reflexos rosa e roxos sem baixar nada da internet */}
+          {/* Reflexos roxos sem baixar nada da internet */}
           <Environment resolution={256}>
             <Lightformer
               intensity={2.5}
-              color="#f9a8d4"
+              color="#e9d5ff"
               position={[0, 5, 0]}
               rotation-x={Math.PI / 2}
               scale={[10, 10, 1]}
             />
             <Lightformer
               intensity={2.5}
-              color="#c084fc"
+              color="#c4b5fd"
               position={[-5, 1, -1]}
               rotation-y={Math.PI / 2}
               scale={[8, 8, 1]}
             />
             <Lightformer
               intensity={1.5}
-              color="#f472b6"
+              color="#a78bfa"
               position={[5, -1, 1]}
               rotation-y={-Math.PI / 2}
               scale={[8, 8, 1]}
