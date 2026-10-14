@@ -1,12 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { DragaoMainPage } from "./components/DragaoMainPage";
 import { D20 } from "./components/D20";
+import { BotaoOrnamental } from "./components/BotaoOrnamental";
 
 export default function Home() {
   const router = useRouter();
@@ -67,7 +67,7 @@ export default function Home() {
         </h2>
 
         <div className="mt-8">
-          <Link
+          <BotaoOrnamental
             href="/realm"
             onClick={(e) => {
               // Clique no dado só rola o dado — não entra no reino
@@ -81,11 +81,10 @@ export default function Home() {
               navegando.current = true;
               window.dispatchEvent(new Event("d20-rolar"));
             }}
-            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-pink-400 to-purple-400 text-white text-xl font-semibold rounded-full shadow-lg shadow-pink-500/30 hover:scale-105 transition-transform"
           >
             <D20 tamanho={44} />
             Clique para Entrar
-          </Link>
+          </BotaoOrnamental>
         </div>
       </div>
     </main>
