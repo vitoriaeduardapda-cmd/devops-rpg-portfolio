@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Lightformer } from "@react-three/drei";
 import * as THREE from "three";
@@ -114,7 +114,7 @@ function poseNumero(face: Face): {
   return { posicao: dummy.position.clone(), quat: dummy.quaternion.clone() };
 }
 
-function Dado({ onResultado }: { onResultado: (n: number | null) => void }) {
+function Dado() {
   const grupo = useRef<THREE.Group>(null);
   const rolando = useRef(false);
 
@@ -145,10 +145,10 @@ function Dado({ onResultado }: { onResultado: (n: number | null) => void }) {
     }
   });
 
-  function rolar() {
+  function rolar(e: { stopPropagation: () => void }) {
     if (!grupo.current || rolando.current) return;
+    e.stopPropagation(); // clica no dado sem sair da página
     rolando.current = true;
-    onResultado(null);
 
     // Sorteia a face e calcula a rotação que a deixa virada para cima
     const face = faces[Math.floor(Math.random() * 20)];
@@ -172,18 +172,6 @@ function Dado({ onResultado }: { onResultado: (n: number | null) => void }) {
       duration: 2.2,
       ease: "power4.out",
       onComplete: () => {
-        // Confere pela orientação final qual face ficou em cima
-        const q = grupo.current!.quaternion;
-        let melhor = 0;
-        let maior = -2;
-        faces.forEach((f, i) => {
-          const d = f.normal.clone().applyQuaternion(q).y;
-          if (d > maior) {
-            maior = d;
-            melhor = i;
-          }
-        });
-        onResultado(faces[melhor].numero);
         rolando.current = false;
       },
     });
@@ -234,27 +222,18 @@ function Dado({ onResultado }: { onResultado: (n: number | null) => void }) {
   );
 }
 
-export function D20Cena() {
-  const [resultado, setResultado] = useState<number | null>(null);
-  const [rolando, setRolando] = useState(false);
-
-  function aoRolar(n: number | null) {
-    if (n === null) {
-      setRolando(true);
-    } else {
-      setRolando(false);
-      setResultado(n);
-    }
-  }
-
+export function D20Cena({ tamanho = 112 }: { tamanho?: number }) {
   return (
-    <div className="w-28 text-center">
-      <div className="h-28 w-28 cursor-pointer">
+    <span
+      className="inline-block shrink-0 align-middle"
+      style={{ width: tamanho, height: tamanho }}
+    >
+      <span className="block cursor-pointer" style={{ width: tamanho, height: tamanho }}>
         <Canvas dpr={[1, 1.75]} camera={{ position: [0, 0, 5.2], fov: 40 }}>
           <ambientLight intensity={0.35} />
           <pointLight position={[4, 3, 4]} intensity={60} color="#ec4899" />
           <pointLight position={[-4, -2, 3]} intensity={60} color="#a855f7" />
-          <Dado onResultado={aoRolar} />
+          <Dado />
           {/* Reflexos rosa e roxos sem baixar nada da internet */}
           <Environment resolution={256}>
             <Lightformer
@@ -280,14 +259,7 @@ export function D20Cena() {
             />
           </Environment>
         </Canvas>
-      </div>
-      <p className="mt-1 font-mono text-sm text-purple-200">
-        {rolando
-          ? "rolando..."
-          : resultado === null
-            ? "clique no dado"
-            : `tirou ${resultado}!`}
-      </p>
-    </div>
+      </span>
+    </span>
   );
 }

@@ -53,9 +53,18 @@ export default function Home() {
           Devops Adventurer
         </h2>
 
-        <div className="mt-8 flex items-center justify-center gap-5">
-          <D20 />
-          <Link href="/realm" className="inline-block px-8 py-4 bg-gradient-to-r from-pink-600 to-purple-600 text-white text-xl font-semibold rounded-full shadow-lg shadow-pink-500/30 hover:scale-105 transition-transform">
+        <div className="mt-8">
+          <Link
+            href="/realm"
+            onClick={(e) => {
+              // Clique no dado só rola o dado — não entra no reino
+              if (e.target instanceof HTMLElement && e.target.closest("canvas")) {
+                e.preventDefault();
+              }
+            }}
+            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-pink-400 to-purple-400 text-white text-xl font-semibold rounded-full shadow-lg shadow-pink-500/30 hover:scale-105 transition-transform"
+          >
+            <D20 tamanho={44} />
             Clique para Entrar
           </Link>
         </div>
