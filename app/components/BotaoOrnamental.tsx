@@ -1,7 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { Cinzel } from "next/font/google";
 import type { MouseEvent, ReactNode } from "react";
+
+// Fonte épica estilo RPG para o botão (combina com fantasia, mantém profissional)
+const cinzel = Cinzel({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+});
 
 // Botão com moldura ornamental em teste — cantos em voluta rosa/lilás.
 // Arquivo: app/components/BotaoOrnamental.tsx
@@ -58,7 +65,7 @@ export function BotaoOrnamental({
       <Link
         href={href}
         onClick={onClick}
-        className="relative inline-flex items-center gap-3 rounded-2xl border-2 border-pink-200/70 bg-gradient-to-r from-pink-400 to-purple-400 px-8 py-4 text-xl font-semibold text-white shadow-[0_0_25px_rgba(236,72,153,0.45)] outline outline-2 outline-offset-[6px] outline-purple-300/40 transition-transform hover:scale-105"
+        className={`${cinzel.className} relative inline-flex items-center gap-3 rounded-2xl border-2 border-pink-200/70 bg-gradient-to-r from-pink-400 to-purple-400 px-8 py-4 text-xl font-semibold tracking-[0.12em] text-white shadow-[0_0_25px_rgba(236,72,153,0.45)] outline outline-2 outline-offset-[6px] outline-purple-300/40 transition-transform hover:scale-105`}
       >
         {children}
       </Link>
