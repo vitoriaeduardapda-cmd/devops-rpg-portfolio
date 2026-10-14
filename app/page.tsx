@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRef } from "react";
 import gsap from "gsap";
 import { DragaoMainPage } from "./components/DragaoMainPage";
+import { D20 } from "./components/D20";
 
 export default function Home() {
   // Referência para a moldura da fada — o GSAP anima esse elemento
@@ -52,9 +53,12 @@ export default function Home() {
           Devops Adventurer
         </h2>
 
-        <Link href="/realm" className="inline-block mt-8 px-8 py-4 bg-gradient-to-r from-pink-600 to-purple-600 text-white text-xl font-semibold rounded-full shadow-lg shadow-pink-500/30 hover:scale-105 transition-transform">
-          ⚔️ Clique para Entrar
-        </Link>
+        <div className="mt-8 flex items-center justify-center gap-5">
+          <D20 />
+          <Link href="/realm" className="inline-block px-8 py-4 bg-gradient-to-r from-pink-600 to-purple-600 text-white text-xl font-semibold rounded-full shadow-lg shadow-pink-500/30 hover:scale-105 transition-transform">
+            Clique para Entrar
+          </Link>
+        </div>
       </div>
     </main>
   );
