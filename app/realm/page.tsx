@@ -5,13 +5,15 @@ const locations = [
     emoji: "🏰",
     name: "Castelo",
     label: "Experiência",
-    description: "Minha jornada profissional",
+    description: "Minha jornada profissional — clique para entrar",
+    href: "/realm/experiencia",
   },
   {
     emoji: "🌲",
     name: "Floresta",
     label: "Habilidades",
-    description: "Ferramentas e tecnologias",
+    description: "Ferramentas e tecnologias — clique para entrar",
+    href: "/realm/habilidades",
   },
   {
     emoji: "🐉",
@@ -30,7 +32,8 @@ const locations = [
     emoji: "🏘️",
     name: "Vila",
     label: "Sobre Mim",
-    description: "Quem sou eu",
+    description: "Quem sou eu — clique para entrar",
+    href: "/realm/sobre",
   },
   {
     emoji: "🔭",
