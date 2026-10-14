@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { DragaoMainPage } from "./components/DragaoMainPage";
 import { D20 } from "./components/D20";
@@ -12,6 +12,15 @@ export default function Home() {
   const router = useRouter();
   // Evita dois cliques no texto empilharem navegações
   const navegando = useRef(false);
+
+  // Entra no reino assim que o dado parar de girar
+  useEffect(() => {
+    const entrar = () => {
+      if (navegando.current) router.push("/realm");
+    };
+    window.addEventListener("d20-parou", entrar);
+    return () => window.removeEventListener("d20-parou", entrar);
+  }, [router]);
   // Referência para a moldura da fada — o GSAP anima esse elemento
   const fadaRef = useRef<HTMLDivElement>(null);
 
@@ -66,12 +75,11 @@ export default function Home() {
                 e.preventDefault();
                 return;
               }
-              // Clique no texto: rola o dado por 2s e só então entra no reino
+              // Clique no texto: rola o dado e entra no reino quando ele parar
               e.preventDefault();
               if (navegando.current) return;
               navegando.current = true;
               window.dispatchEvent(new Event("d20-rolar"));
-              setTimeout(() => router.push("/realm"), 2000);
             }}
             className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-pink-400 to-purple-400 text-white text-xl font-semibold rounded-full shadow-lg shadow-pink-500/30 hover:scale-105 transition-transform"
           >

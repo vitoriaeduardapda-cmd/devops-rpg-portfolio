@@ -169,10 +169,12 @@ function Dado() {
       x: euler.x + volta * 2,
       y: euler.y + volta * 2,
       z: euler.z + volta,
-      duration: 2.2,
+      duration: 2,
       ease: "power4.out",
       onComplete: () => {
         rolando.current = false;
+        // Avisa a página que o dado parou para entrar no reino na hora
+        window.dispatchEvent(new Event("d20-parou"));
       },
     });
   }
