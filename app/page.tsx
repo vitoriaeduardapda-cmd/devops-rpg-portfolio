@@ -2,17 +2,22 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Pinyon_Script } from "next/font/google";
+import { Cormorant_Garamond, Montserrat } from "next/font/google";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { DragaoMainPage } from "./components/DragaoMainPage";
 import { D20 } from "./components/D20";
 import { BotaoOrnamental } from "./components/BotaoOrnamental";
 
-// Caligrafia delicada estilo élfico para o nome
-const pinyon = Pinyon_Script({
+// Nome: serifa elegante e refinada (fantasia sem caricatura)
+// Subtítulo: sans moderna espaçada (o lado DevOps/profissional)
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["600", "700"],
+});
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["500"],
 });
 
 export default function Home() {
@@ -66,10 +71,10 @@ export default function Home() {
             />
           </div>
         </div>
-        <h1 className={`${pinyon.className} text-6xl md:text-7xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent`}>
+        <h1 className={`${cormorant.className} text-5xl md:text-6xl font-semibold tracking-wide bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent`}>
           Vitória Eduarda
         </h1>
-        <h2 className="text-2xl md:text-3xl text-purple-200 font-medium tracking-wide">
+        <h2 className={`${montserrat.className} text-lg md:text-xl uppercase tracking-[0.35em] text-purple-200`}>
           Devops Adventurer
         </h2>
 
