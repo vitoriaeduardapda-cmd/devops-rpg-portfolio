@@ -71,7 +71,7 @@ export default function Home() {
             />
           </div>
         </div>
-        <h1 className={`${cormorant.className} text-5xl md:text-6xl font-semibold tracking-wide bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent`}>
+        <h1 className={`${cormorant.className} text-5xl md:text-6xl font-semibold tracking-tight bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent`}>
           Vitória Eduarda
         </h1>
         <h2 className={`${montserrat.className} text-lg md:text-xl uppercase tracking-[0.35em] text-purple-200`}>
