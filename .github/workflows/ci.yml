@@ -35,6 +35,10 @@ jobs:
       - name: Rodar lint
         run: npm run lint
 
-      # 5. Roda o build do Next.js para garantir que o site constrói sem erros
+      # 5. Roda os testes automatizados (Jest)
+      - name: Rodar testes
+        run: npm run test
+
+      # 6. Roda o build do Next.js para garantir que o site constrói sem erros
       - name: Rodar build
         run: npm run build
