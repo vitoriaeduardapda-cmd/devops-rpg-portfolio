@@ -26,7 +26,8 @@ const locations = [
     emoji: "💎",
     name: "Cristal",
     label: "Status do Sistema",
-    description: "Saúde da aplicação",
+    description: "Saúde da aplicação — clique para entrar",
+    href: "/realm/cristal",
   },
   {
     emoji: "🏘️",
@@ -39,7 +40,8 @@ const locations = [
     emoji: "🔭",
     name: "Torre",
     label: "Monitoramento",
-    description: "Observabilidade e métricas",
+    description: "Observabilidade e métricas — clique para entrar",
+    href: "/realm/torre",
   },
 ];
 
