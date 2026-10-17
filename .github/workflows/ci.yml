@@ -1,0 +1,40 @@
+name: CI - Reino DevOps
+
+# Esse fluxo roda sempre que você fizer push ou abrir um Pull Request na branch main.
+# Ele verifica se o código está limpo (lint) e se o site constrói sem erros (build).
+# Só depois disso a Vercel pode publicar as alterações no ar.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    # Roda em uma máquina virtual limpa (Ubuntu)
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Baixa o código do GitHub
+      - name: Baixar código do repositório
+        uses: actions/checkout@v4
+
+      # 2. Instala o Node.js (versão 20 LTS)
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # 3. Instala as dependências (npm ci é mais seguro que npm install em CI)
+      - name: Instalar dependências
+        run: npm ci
+
+      # 4. Roda o linter (ESLint) para encontrar erros de código
+      - name: Rodar lint
+        run: npm run lint
+
+      # 5. Roda o build do Next.js para garantir que o site constrói sem erros
+      - name: Rodar build
+        run: npm run build
