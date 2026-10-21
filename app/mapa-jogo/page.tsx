@@ -4,6 +4,9 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
+// Letras do alfabeto para marcar cada posição no mapa.
+// Quando você tiver as imagens PNG, me diga: A = qual imagem? B = qual imagem?...
+// Eu então substituo a letra pelo arquivo da imagem na posição exata.
 const locais = [
   {
     id: "castelo",
@@ -11,6 +14,7 @@ const locais = [
     label: "Experiência",
     href: "/realm/experiencia",
     emoji: "🏰",
+    letra: "A",
     x: 22,
     y: 18,
     cor: "from-pink-400 to-purple-500",
@@ -21,6 +25,7 @@ const locais = [
     label: "Habilidades",
     href: "/realm/habilidades",
     emoji: "🌲",
+    letra: "B",
     x: 48,
     y: 14,
     cor: "from-emerald-400 to-teal-500",
@@ -31,6 +36,7 @@ const locais = [
     label: "Projetos",
     href: "/realm/projetos",
     emoji: "🐉",
+    letra: "C",
     x: 72,
     y: 22,
     cor: "from-rose-500 to-fuchsia-600",
@@ -41,6 +47,7 @@ const locais = [
     label: "Status",
     href: "/realm/cristal",
     emoji: "💎",
+    letra: "D",
     x: 86,
     y: 34,
     cor: "from-fuchsia-400 to-purple-600",
@@ -51,6 +58,7 @@ const locais = [
     label: "Sobre Mim",
     href: "/realm/sobre",
     emoji: "🏘️",
+    letra: "E",
     x: 44,
     y: 62,
     cor: "from-amber-400 to-orange-500",
@@ -61,6 +69,7 @@ const locais = [
     label: "Monitoramento",
     href: "/realm/torre",
     emoji: "🔭",
+    letra: "F",
     x: 78,
     y: 72,
     cor: "from-indigo-400 to-blue-500",
@@ -75,7 +84,6 @@ export default function MapaJogo() {
     y: 82,
   });
 
-  // Posições em porcentagem do container
   const posicoes: Record<string, { x: number; y: number }> = {
     castelo: { x: 22, y: 18 },
     floresta: { x: 48, y: 14 },
@@ -86,7 +94,6 @@ export default function MapaJogo() {
   };
 
   useEffect(() => {
-    // Posiciona o carrinho no início
     gsap.set(carrinhoRef.current, { x: 12, y: 82 });
   }, []);
 
@@ -97,21 +104,18 @@ export default function MapaJogo() {
     const alvo = posicoes[id];
     if (!alvo) return;
 
-    // Anima o carrinho mineiro até a ilha
     gsap.to(carrinhoRef.current, {
       x: alvo.x,
       y: alvo.y,
       duration: 1.6,
       ease: "power2.inOut",
       rotation: () => {
-        // Gira levemente na direção do movimento
         const dx = alvo.x - posicaoAtual.x;
         const dy = alvo.y - posicaoAtual.y;
         return Math.atan2(dy, dx) * (180 / Math.PI) - 90;
       },
       onComplete: () => {
         setPosicaoAtual(alvo);
-        // Após a animação, navega para a página do local
         router.push(locais.find((l) => l.id === id)!.href);
       },
     });
@@ -157,7 +161,6 @@ export default function MapaJogo() {
       <div
         className="relative w-full h-[80vh] max-w-[1200px] mx-auto pt-32"
         style={{
-          // Fundo simulando mapa com nuvens (apenas CSS)
           background:
             "radial-gradient(circle at 20% 30%, rgba(236,72,153,0.15) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(139,92,246,0.15) 0%, transparent 40%)",
         }}
@@ -183,7 +186,7 @@ export default function MapaJogo() {
           )}
         </div>
 
-        {/* Ilhas */}
+        {/* Ilhas com caixinhas de letra */}
         {locais.map((local) => (
           <div
             key={local.id}
@@ -192,11 +195,18 @@ export default function MapaJogo() {
               left: `${local.x}%`,
               top: `${local.y}%`,
               transform: "translate(-50%, -50%)",
-              width: "110px",
-              height: "110px",
+              width: "140px",
+              height: "140px",
             }}
             onClick={(e) => viajarPara(local.id, e)}
           >
+            {/* Caixinha da letra (A, B, C...)} */}
+            <div
+              className="absolute -top-4 -left-4 z-30 w-10 h-10 rounded-full bg-pink-500 border-2 border-white flex items-center justify-center text-xs font-bold text-white shadow-lg shadow-pink-500/50 group-hover:scale-110 transition-transform"
+            >
+              {local.letra}
+            </div>
+
             {/* Sombra da ilha */}
             <div
               className="absolute inset-0 rounded-full blur-xl opacity-40"
@@ -225,16 +235,12 @@ export default function MapaJogo() {
             transform: `translate(-50%, -50%) rotate(-90deg)`,
           }}
         >
-          {/* Vagão do carrinho */}
           <div className="relative w-12 h-8 bg-pink-500 rounded-t-lg shadow-lg border-2 border-pink-300">
-            {/* Caixa de minério/cristal */}
             <div
               className="absolute top-[-10px] left-1/2 -translate-x-1/2 w-4 h-4 bg-purple-400 rounded-full shadow-[0_0_10px_rgba(168,85,247,0.8)]"
             />
-            {/* Rodas */}
             <div className="absolute bottom-0 left-1 w-2 h-2 bg-purple-800 rounded-full" />
             <div className="absolute bottom-0 right-1 w-2 h-2 bg-purple-800 rounded-full" />
-            {/* Passageira (cabelo rosa) */}
             <div
               className="absolute top-[-14px] left-2 w-3 h-3 bg-pink-300 rounded-full shadow-md"
             />
