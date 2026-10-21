@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 
 const locais = [
@@ -59,6 +59,17 @@ export default function MapaMapeador() {
     setAssetInput("");
     setMostrarModal(false);
   }
+
+  // Tecla Enter confirma o ponto no modal
+  useEffect(() => {
+    function teclaEnter(e: KeyboardEvent) {
+      if (mostrarModal && pontoTemporario && e.key === "Enter") {
+        salvarPonto();
+      }
+    }
+    window.addEventListener("keydown", teclaEnter);
+    return () => window.removeEventListener("keydown", teclaEnter);
+  }, [mostrarModal, pontoTemporario]);
 
   function cancelarPonto() {
     setPontoTemporario(null);
