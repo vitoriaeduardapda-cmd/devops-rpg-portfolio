@@ -88,8 +88,8 @@ export default function MapaFinal() {
               left: `${local.x}%`,
               top: `${local.y}%`,
               transform: "translate(-50%, -50%)",
-              width: "260px",
-              height: "260px",
+              width: "340px",
+              height: "340px",
             }}
             onClick={(e) => viajarPara(local.id, e)}
           >
@@ -126,7 +126,7 @@ export default function MapaFinal() {
         {/* Carrinho mineiro (posicionado na coordenada específica, tamanho dobrado) */}
         <div
           ref={carrinhoRef}
-          className="absolute z-50 w-32 h-32 flex items-center justify-center pointer-events-none"
+          className="absolute z-50 w-48 h-48 flex items-center justify-center pointer-events-none"
           style={{
             transform: `translate(-50%, -50%) rotate(-90deg)`,
           }}
